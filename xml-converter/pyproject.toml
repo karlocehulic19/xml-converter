@@ -1,0 +1,24 @@
+[project]
+name = "xml-converter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Karlo Cehulic", email = "karlocehlic@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "lxml>=6.1.1",
+]
+
+[project.scripts]
+xml-converter = "xml_converter:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.39.9",
+]
