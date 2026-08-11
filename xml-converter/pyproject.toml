@@ -21,4 +21,12 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "basedpyright>=1.39.9",
+    "types-lxml>=2026.2.16",
 ]
+
+[tool.basedpyright]
+# Enables maximum strictness
+typeCheckingMode = "all"
+
+# Ensure the CLI fails in CI/CD if any warnings are detected
+failOnWarnings = true
