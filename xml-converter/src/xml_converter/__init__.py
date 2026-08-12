@@ -20,7 +20,7 @@ def main() -> None:
     print("Done, check out new_xml.xml")
 
 def tree_from_examples(filename: str):
-    rel = "../../xml-examples/" + filename
+    rel = "../../xml-files/" + filename
     abs = os.path.dirname(__file__)
     abs_target = os.path.join(abs, rel)
     xml_file = open(os.path.abspath(abs_target))
