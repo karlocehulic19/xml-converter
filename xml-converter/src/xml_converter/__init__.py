@@ -1,8 +1,15 @@
 import os
 from lxml import etree
+from dotenv import load_dotenv
 
-QUERY_WORD_IN = "{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}replace"
-QUERY_WORD_OUT = "replace"
+dirname = os.path.dirname(__file__)
+env_path = os.path.join(dirname, "../../.env")
+_ = load_dotenv(env_path)
+
+QUERY_WORD_IN = os.getenv("QUERY_WORD_IN")
+QUERY_WORD_OUT = os.getenv("QUERY_WORD_OUT")
+if not QUERY_WORD_IN or not QUERY_WORD_OUT:
+    raise Exception("Make sure environmental variables for query element words are set!")
 
 def main() -> None:
     tree_format = tree_from_examples("metro_input.xml")
