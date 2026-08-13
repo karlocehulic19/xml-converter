@@ -6,10 +6,8 @@ dirname = os.path.dirname(__file__)
 env_path = os.path.join(dirname, "../../.env")
 _ = load_dotenv(env_path)
 
-QUERY_WORD_IN = os.getenv("QUERY_WORD_IN")
-QUERY_WORD_OUT = os.getenv("QUERY_WORD_OUT")
-if not QUERY_WORD_IN or not QUERY_WORD_OUT:
-    raise Exception("Make sure environmental variables for query element words are set!")
+XPATH_FILTER_IN = os.getenv("XPATH_FILTER_IN", ".//*[name()='replace']")
+XPATH_FILTER_OUT = os.getenv("XPATH_FILTER_OUT", ".//*[name()='replace']")
 
 def main() -> None:
     tree_format = tree_from_examples("metro_input.xml")
@@ -36,8 +34,9 @@ def tree_from_examples(filename: str):
 
 
 def replace_all(tree_format: etree.ElementTree, tree_in: etree.ElementTree, tree_format_out: etree.ElementTree):
-    xpath_filter_in = f".//{QUERY_WORD_IN}"
-    for element_in in tree_format.findall(xpath_filter_in):
+    for element_in in tree_format.xpath(XPATH_FILTER_IN):
+        if not isinstance(element_in, etree.Element):
+            raise Exception("XPath query found non element. Make sure your XPath queries only XML elements")
         new_value = get_value(element_in, tree_format, tree_in)
         (linked_path, link_elem) = get_linked_path(element_in, tree_format_out)
         elem_out = tree_format_out.find(linked_path)
@@ -57,9 +56,10 @@ def get_value(element_in: etree.Element, tree_format: etree.ElementTree, tree_in
 
 def get_linked_path(elem_in: etree.Element, tree_out: etree.ElementTree):
     param = elem_in.get("param")
-    xpath_filter_out = f".//{QUERY_WORD_OUT}[@param='{param}']"
-    elem = tree_out.find(xpath_filter_out)
-    if elem == None: raise Exception(f"Replace query with param {param} not found!")
+    elem_list = tree_out.xpath(XPATH_FILTER_OUT + f"[@param='{param}']")
+    if not isinstance(elem_list, list): raise Exception("XPath found non XML element list.")
+    elem = elem_list[0]
+    if not isinstance(elem, etree.Element): raise Exception("XPath found non XML element.")
     par = elem.getparent()
     if par == None: raise Exception("Replace query cannot be root!")
     path = tree_out.getelementpath(par)
