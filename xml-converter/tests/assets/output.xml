@@ -1,0 +1,26 @@
+<logistics:FulfillmentRequest xmlns:logistics="urn:shipping:v1" xmlns:crm="urn:customer:v1">
+    <logistics:RoutingData>
+        <logistics:ReferenceID>PO-2026-A8F92</logistics:ReferenceID>
+        <logistics:Destination>
+            <logistics:AddressLine>1400 Hill House Road</logistics:AddressLine>
+            <logistics:Municipality>Boston</logistics:Municipality>
+            <logistics:Zip>02115</logistics:Zip>
+        </logistics:Destination>
+    </logistics:RoutingData>
+    <crm:Recipient>
+        <crm:FullName>Eleanor Vance</crm:FullName>
+        <crm:NotificationEmail>eleanor.vance@example.com</crm:NotificationEmail>
+    </crm:Recipient>
+    <logistics:Manifest>
+        <logistics:PackItem>
+            <logistics:Code>WIDGET-X1-BLU</logistics:Code>
+            <logistics:Count>2</logistics:Count>
+            <logistics:DeclaredValue>14.99</logistics:DeclaredValue>
+        </logistics:PackItem>
+        <logistics:PackItem>
+            <logistics:Code>GIZMO-V2-RED</logistics:Code>
+            <logistics:Count>1</logistics:Count>
+            <logistics:DeclaredValue>49.50</logistics:DeclaredValue>
+        </logistics:PackItem>
+    </logistics:Manifest>
+</logistics:FulfillmentRequest>

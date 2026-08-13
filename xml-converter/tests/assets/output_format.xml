@@ -1,0 +1,26 @@
+<logistics:FulfillmentRequest xmlns:logistics="urn:shipping:v1" xmlns:crm="urn:customer:v1">
+    <logistics:RoutingData>
+        <logistics:ReferenceID><replace param="order_id" /></logistics:ReferenceID>
+        <logistics:Destination>
+            <logistics:AddressLine><replace param="ship_street" /></logistics:AddressLine>
+            <logistics:Municipality><replace param="ship_city" /></logistics:Municipality>
+            <logistics:Zip><replace param="ship_zip" /></logistics:Zip>
+        </logistics:Destination>
+    </logistics:RoutingData>
+    <crm:Recipient>
+        <crm:FullName><replace param="cust_fullname" /></crm:FullName>
+        <crm:NotificationEmail><replace param="cust_email" /></crm:NotificationEmail>
+    </crm:Recipient>
+    <logistics:Manifest>
+        <logistics:PackItem>
+            <logistics:Code><replace param="item1_sku" /></logistics:Code>
+            <logistics:Count><replace param="item1_qty" /></logistics:Count>
+            <logistics:DeclaredValue><replace param="item1_price" /></logistics:DeclaredValue>
+        </logistics:PackItem>
+        <logistics:PackItem>
+            <logistics:Code><replace param="item2_sku" /></logistics:Code>
+            <logistics:Count><replace param="item2_qty" /></logistics:Count>
+            <logistics:DeclaredValue><replace param="item2_price" /></logistics:DeclaredValue>
+        </logistics:PackItem>
+    </logistics:Manifest>
+</logistics:FulfillmentRequest>

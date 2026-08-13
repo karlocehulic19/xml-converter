@@ -1,0 +1,37 @@
+<biz:PurchaseOrder xmlns:biz="http://enterprise.com/po" xmlns:cmn="http://enterprise.com/common">
+    <biz:Header>
+        <biz:DocumentID>PO-2026-A8F92</biz:DocumentID>
+        <biz:OrderDate>2026-10-15T08:30:00Z</biz:OrderDate>
+        <biz:Status>APPROVED</biz:Status>
+    </biz:Header>
+    <biz:Customer>
+        <cmn:Identifier>CUST-99281</cmn:Identifier>
+        <cmn:Name>
+            <cmn:FullName>Eleanor Vance</cmn:FullName>
+        </cmn:Name>
+        <cmn:Contact>
+            <cmn:Email>eleanor.vance@example.com</cmn:Email>
+            <cmn:Phone>+1-555-0192</cmn:Phone>
+        </cmn:Contact>
+        <cmn:ShippingAddress>
+            <cmn:Street>1400 Hill House Road</cmn:Street>
+            <cmn:City>Boston</cmn:City>
+            <cmn:PostalCode>02115</cmn:PostalCode>
+            <cmn:Country>USA</cmn:Country>
+        </cmn:ShippingAddress>
+    </biz:Customer>
+    <biz:LineItems>
+        <biz:Item>
+            <biz:LineNumber>1</biz:LineNumber>
+            <biz:SKU>WIDGET-X1-BLU</biz:SKU>
+            <biz:Quantity>2</biz:Quantity>
+            <biz:UnitPrice>14.99</biz:UnitPrice>
+        </biz:Item>
+        <biz:Item>
+            <biz:LineNumber>2</biz:LineNumber>
+            <biz:SKU>GIZMO-V2-RED</biz:SKU>
+            <biz:Quantity>1</biz:Quantity>
+            <biz:UnitPrice>49.50</biz:UnitPrice>
+        </biz:Item>
+    </biz:LineItems>
+</biz:PurchaseOrder>

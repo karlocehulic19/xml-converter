@@ -1,0 +1,37 @@
+<biz:PurchaseOrder xmlns:biz="http://enterprise.com/po" xmlns:cmn="http://enterprise.com/common">
+    <biz:Header>
+        <biz:DocumentID><replace param="order_id" /></biz:DocumentID>
+        <biz:OrderDate>2026-10-15T08:30:00Z</biz:OrderDate>
+        <biz:Status>APPROVED</biz:Status>
+    </biz:Header>
+    <biz:Customer>
+        <cmn:Identifier>CUST-99281</cmn:Identifier>
+        <cmn:Name>
+            <cmn:FullName><replace param="cust_fullname" /></cmn:FullName>
+        </cmn:Name>
+        <cmn:Contact>
+            <cmn:Email><replace param="cust_email" /></cmn:Email>
+            <cmn:Phone>+1-555-0192</cmn:Phone>
+        </cmn:Contact>
+        <cmn:ShippingAddress>
+            <cmn:Street><replace param="ship_street" /></cmn:Street>
+            <cmn:City><replace param="ship_city" /></cmn:City>
+            <cmn:PostalCode><replace param="ship_zip" /></cmn:PostalCode>
+            <cmn:Country>USA</cmn:Country>
+        </cmn:ShippingAddress>
+    </biz:Customer>
+    <biz:LineItems>
+        <biz:Item>
+            <biz:LineNumber>1</biz:LineNumber>
+            <biz:SKU><replace param="item1_sku" /></biz:SKU>
+            <biz:Quantity><replace param="item1_qty" /></biz:Quantity>
+            <biz:UnitPrice><replace param="item1_price" /></biz:UnitPrice>
+        </biz:Item>
+        <biz:Item>
+            <biz:LineNumber>2</biz:LineNumber>
+            <biz:SKU><replace param="item2_sku" /></biz:SKU>
+            <biz:Quantity><replace param="item2_qty" /></biz:Quantity>
+            <biz:UnitPrice><replace param="item2_price" /></biz:UnitPrice>
+        </biz:Item>
+    </biz:LineItems>
+</biz:PurchaseOrder>
