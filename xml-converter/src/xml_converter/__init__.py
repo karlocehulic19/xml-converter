@@ -19,6 +19,13 @@ def main() -> None:
     tree_format_out.write("new_xml.xml")
     print("Done, check out new_xml.xml")
 
+def convert_xml_string(input_format: str, input: str, output_format: str):
+    tree_format_in = etree.fromstring(input_format).getroottree()
+    tree_in = etree.fromstring(input).getroottree()
+    tree_format_out = etree.fromstring(output_format).getroottree()
+    replace_all(tree_format_in, tree_in, tree_format_out)
+    return etree.tostring(tree_format_out, pretty_print=True)
+
 def tree_from_examples(filename: str):
     rel = "../../xml-files/" + filename
     abs = os.path.dirname(__file__)
@@ -26,6 +33,7 @@ def tree_from_examples(filename: str):
     xml_file = open(os.path.abspath(abs_target))
     x = etree.parse(xml_file)
     return x
+
 
 def replace_all(tree_format: etree.ElementTree, tree_in: etree.ElementTree, tree_format_out: etree.ElementTree):
     xpath_filter_in = f".//{QUERY_WORD_IN}"
