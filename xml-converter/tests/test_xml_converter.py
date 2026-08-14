@@ -1,4 +1,4 @@
-from xml_converter import convert_xml_string
+from xml_converter import Converter
 from typing import Callable
 from os import path
 
@@ -8,6 +8,7 @@ def test_string_conversion():
     input_format_s = open(get_asset_path("input_format.xml")).read()
     output_s = open(get_asset_path("output.xml")).read()
     output_format_s = open(get_asset_path("output_format.xml")).read()
-    res = convert_xml_string(input_format_s, input_s, output_format_s).decode()
+    c = Converter(input_format_s, input_s, output_format_s)
+    res = c.convert_to_string()
     assert res == output_s
     
