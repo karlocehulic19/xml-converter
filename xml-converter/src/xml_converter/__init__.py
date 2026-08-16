@@ -32,12 +32,12 @@ class ConvertingElementTree():
     def replace_query_element(self, query_param: str, new_value: str):
         elem_list = self.tree.xpath(XPATH_FILTER_OUT + f"[@param='{query_param}']")
         if not isinstance(elem_list, list): raise Exception("XPath found non XML element list.")
-        elem = elem_list[0]
-        if not isinstance(elem, etree.Element): raise Exception("XPath found non XML element.")
-        par = elem.getparent()
-        if par == None: raise Exception("Replace query cannot be root!")
-        par.remove(elem)
-        par.text = new_value
+        for elem in elem_list:
+            if not isinstance(elem, etree.Element): raise Exception("XPath found non XML element.")
+            par = elem.getparent()
+            if par == None: raise Exception("Replace query cannot be root!")
+            par.remove(elem)
+            par.text = new_value
 
 class Converter():
     def __init__(self, input_format: str, input: str, output_format: str):
