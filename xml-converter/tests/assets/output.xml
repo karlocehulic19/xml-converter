@@ -9,8 +9,10 @@
     </logistics:RoutingData>
     <crm:Recipient>
         <crm:FullName>Eleanor Vance</crm:FullName>
+        <crm:FullNameUpper>ELEANOR VANCE</crm:FullNameUpper>
         <crm:NotificationEmail>eleanor.vance@example.com</crm:NotificationEmail>
         <crm:ContactEmail>eleanor.vance@example.com</crm:ContactEmail>
+        <crm:DateOfBirth>13.01.1899.</crm:DateOfBirth>
     </crm:Recipient>
     <logistics:Manifest>
         <logistics:PackItem>

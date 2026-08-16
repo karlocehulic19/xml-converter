@@ -8,10 +8,12 @@
         <cmn:Identifier>CUST-99281</cmn:Identifier>
         <cmn:Name>
             <cmn:FullName>Eleanor Vance</cmn:FullName>
+            <cmn:FullNameUpperTest>Eleanor Vance</cmn:FullNameUpperTest>
         </cmn:Name>
         <cmn:Contact>
             <cmn:Email>eleanor.vance@example.com</cmn:Email>
             <cmn:Phone>+1-555-0192</cmn:Phone>
+            <cmn:DateOfBirth>01-13-1899</cmn:DateOfBirth>
         </cmn:Contact>
         <cmn:ShippingAddress>
             <cmn:Street>1400 Hill House Road</cmn:Street>

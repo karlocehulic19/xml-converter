@@ -8,10 +8,12 @@
         <cmn:Identifier>CUST-99281</cmn:Identifier>
         <cmn:Name>
             <cmn:FullName><replace param="cust_fullname" /></cmn:FullName>
+            <cmn:FullNameUpperTest><replace param="cust_fullname_u" uppercase="" /></cmn:FullNameUpperTest>
         </cmn:Name>
         <cmn:Contact>
             <cmn:Email><replace param="cust_email" /></cmn:Email>
             <cmn:Phone>+1-555-0192</cmn:Phone>
+            <cmn:DateOfBirth><replace param="cust_datebirth" dparse="%m-%d-%Y" /></cmn:DateOfBirth>
         </cmn:Contact>
         <cmn:ShippingAddress>
             <cmn:Street><replace param="ship_street" /></cmn:Street>

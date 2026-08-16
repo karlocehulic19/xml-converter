@@ -9,8 +9,10 @@
     </logistics:RoutingData>
     <crm:Recipient>
         <crm:FullName><replace param="cust_fullname" /></crm:FullName>
+        <crm:FullNameUpper><replace param="cust_fullname_u" uppercase="" /></crm:FullNameUpper>
         <crm:NotificationEmail><replace param="cust_email" /></crm:NotificationEmail>
         <crm:ContactEmail><replace param="cust_email" /></crm:ContactEmail>
+        <crm:DateOfBirth><replace param="cust_datebirth" dparse="%d.%m.%Y." /></crm:DateOfBirth>
     </crm:Recipient>
     <logistics:Manifest>
         <logistics:PackItem>
