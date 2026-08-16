@@ -8,6 +8,6 @@ def test_string_conversion():
     input_format_s = open(get_asset_path("input_format.xml")).read()
     output_s = open(get_asset_path("output.xml")).read()
     output_format_s = open(get_asset_path("output_format.xml")).read()
-    res = Converter.convert_to_string(input_format_s, input_s, output_format_s)
+    res = Converter.string_to_string(input_format_s, input_s, output_format_s)
     assert res == output_s
     
