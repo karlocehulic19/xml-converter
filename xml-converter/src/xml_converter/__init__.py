@@ -1,8 +1,9 @@
 import os
-from typing import Counter
 import typing
 from lxml import etree
 from dotenv import load_dotenv
+from xml_converter.value_pareser import get_input_parsed_callback
+from typing import Callable
 
 dirname = os.path.dirname(__file__)
 env_path = os.path.join(dirname, "../../.env")
@@ -30,7 +31,7 @@ class ConvertingElementTree():
         if linked_parent == None: raise Exception("Replace query cannot be root!")
         return self.tree.getelementpath(linked_parent)
     
-    def replace_query_element(self, query_param: str, new_value: str):
+    def replace_query_element(self, query_param: str, get_parsed_value: Callable[[list[tuple[str, str]]], str]):
         elem_list = self.tree.xpath(XPATH_FILTER_OUT + f"[@param='{query_param}']")
         elem_list = typing.cast(list[etree.ElementTree], elem_list)
         if len(elem_list) == 0: raise Exception("XPath didn't found any maches for param: " + query_param)
@@ -39,7 +40,7 @@ class ConvertingElementTree():
             par = elem.getparent()
             if par == None: raise Exception("Replace query cannot be root!")
             par.remove(elem)
-            par.text = new_value
+            par.text = get_parsed_value(elem.items())
 
 class Converter():
     def __init__(self, input_format: str, input: str, output_format: str):
@@ -77,13 +78,13 @@ class Converter():
             linking_path = input_format_tree.get_linked_path(element_in)
             new_value_elem = input_tree.tree.find(linking_path)
             if new_value_elem == None: raise Exception("Linked path not found in input file")
-            new_value = new_value_elem.text
-            if new_value == None: raise Exception("Empty switches not yet developed")
+            if new_value_elem.text == None: raise Exception("Empty tags aren't supported yet")
+            get_parsed_value = get_input_parsed_callback(element_in.items(), new_value_elem.text)
 
             # Looking at output, finding the path to inject new value, remove replace
             param = element_in.get("param")
             if param == None: raise Exception("Query elements must have 'param' attribute")
-            output_format_tree.replace_query_element(param, new_value)
+            output_format_tree.replace_query_element(param, get_parsed_value)
 
         return etree.tostring(output_format_tree.tree).decode()
 
