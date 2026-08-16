@@ -1,4 +1,5 @@
 import os
+from typing import Counter
 from lxml import etree
 from dotenv import load_dotenv
 
@@ -10,10 +11,14 @@ XPATH_FILTER_IN = os.getenv("XPATH_FILTER_IN", ".//*[name()='replace']")
 XPATH_FILTER_OUT = os.getenv("XPATH_FILTER_OUT", ".//*[name()='replace']")
 
 def main() -> None:
-    tree_format_s = open("metro_input.xml").read()
-    tree_in = open("t1.xml").read()
-    tree_format_out = open("metro_output.xml").read()
-    print(Converter.convert_to_string(tree_format_s, tree_in, tree_format_out))
+    input_format_path = get_xml_file_path("input_format.xml")
+    input_path = get_xml_file_path("input.xml")
+    output_format_path = get_xml_file_path("output_format.xml")
+
+    print(Converter.file_to_string(input_format_path, input_path, output_format_path))
+
+def get_xml_file_path(filename: str) -> str:
+    return os.path.join(dirname, "../../xml-files/" + filename)
 
 class ConvertingElementTree():
     def __init__(self, tree: etree.ElementTree):
@@ -43,12 +48,26 @@ class Converter():
         self.is_processed: bool = False;
 
     @staticmethod
-    def convert_to_string(input_format: str, input: str, output_format: str):
-        input_format_tree: ConvertingElementTree = ConvertingElementTree(etree.fromstring(input_format).getroottree())
-        input_tree: ConvertingElementTree = ConvertingElementTree(etree.fromstring(input).getroottree())
-        # Used for storing output as well
-        output_format_tree: ConvertingElementTree = ConvertingElementTree(etree.fromstring(output_format).getroottree())
+    def file_to_string(input_format_path: str, input_path: str, output_format_path: str):
+        input_format_tree = etree.parse(open(input_format_path))
+        input_tree = etree.parse(open(input_path))
+        output_format_tree = etree.parse(open(output_format_path))
+        return Converter.convert_to_string(input_format_tree, input_tree, output_format_tree)
 
+    @staticmethod
+    def string_to_string(input_format: str, input: str, output_format: str):
+        input_format_tree = etree.fromstring(input_format).getroottree()
+        input_tree = etree.fromstring(input).getroottree()
+        # Used for storing output as well
+        output_format_tree = etree.fromstring(output_format).getroottree()
+        return Converter.convert_to_string(input_format_tree, input_tree, output_format_tree)
+
+    @staticmethod
+    def convert_to_string(input_format_tree_in: etree.ElementTree, input_tree_in: etree.ElementTree, output_format_tree_in: etree.ElementTree):
+        input_format_tree: ConvertingElementTree = ConvertingElementTree(input_format_tree_in)
+        input_tree: ConvertingElementTree = ConvertingElementTree(input_tree_in)
+        # Used for storing output as well
+        output_format_tree: ConvertingElementTree = ConvertingElementTree(output_format_tree_in)
 
         for element_in in input_format_tree.tree.xpath(XPATH_FILTER_IN):
             if not isinstance(element_in, etree.Element):
