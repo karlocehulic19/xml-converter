@@ -10,6 +10,7 @@
     <crm:Recipient>
         <crm:FullName><replace param="cust_fullname" /></crm:FullName>
         <crm:NotificationEmail><replace param="cust_email" /></crm:NotificationEmail>
+        <crm:ContactEmail><replace param="cust_email" /></crm:ContactEmail>
     </crm:Recipient>
     <logistics:Manifest>
         <logistics:PackItem>
