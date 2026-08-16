@@ -1,5 +1,6 @@
 import os
 from typing import Counter
+import typing
 from lxml import etree
 from dotenv import load_dotenv
 
@@ -31,7 +32,8 @@ class ConvertingElementTree():
     
     def replace_query_element(self, query_param: str, new_value: str):
         elem_list = self.tree.xpath(XPATH_FILTER_OUT + f"[@param='{query_param}']")
-        if not isinstance(elem_list, list): raise Exception("XPath found non XML element list.")
+        elem_list = typing.cast(list[etree.ElementTree], elem_list)
+        if len(elem_list) == 0: raise Exception("XPath didn't found any maches for param: " + query_param)
         for elem in elem_list:
             if not isinstance(elem, etree.Element): raise Exception("XPath found non XML element.")
             par = elem.getparent()
