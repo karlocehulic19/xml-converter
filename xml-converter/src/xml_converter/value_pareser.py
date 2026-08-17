@@ -11,7 +11,8 @@ def dparse_tag_method(attrib_val_in: str, attrib_val_out: str, value: str):
 tag_methods: dict[str, Callable[[str, str, str], str]] = {
         "param": lambda attrib_val_in, attrib_val_out, value: value,
         "uppercase": lambda attrib_val_in, attrib_val_out, value: value.upper(),
-        "dparse": lambda a_in, a_out, value: dparse_tag_method(a_in, a_out, value)
+        "dparse": lambda a_in, a_out, value: dparse_tag_method(a_in, a_out, value),
+        "datenowiso": lambda attrib_val_in, attrib_val_out, value: datetime.now().isoformat()
         }
 
 def get_input_parsed_callback(attributes_in: AttribItems, text_value: str):
